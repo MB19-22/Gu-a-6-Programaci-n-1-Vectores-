@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int numArticulo, cantVendida;
+    int ventas[20] = {0};
+
+    cout << "Ingrese el numero de articulo (1 a 20, 0 para finalizar): ";
+    cin >> numArticulo;
+
+    while (numArticulo != 0) {
+        cout << "Ingrese la cantidad vendida: ";
+        cin >> cantVendida;
+
+        ventas[numArticulo - 1] += cantVendida;
+
+        cout << "Ingrese el numero de articulo (1 a 20, 0 para finalizar): ";
+        cin >> numArticulo;
+    }
+
+    int maxVentas = ventas[0];
+    int artMax = 1;
+
+    for (int i = 1; i < 20; i++) {
+        if (ventas[i] > maxVentas) {
+            maxVentas = ventas[i];
+            artMax = i + 1;
+        }
+    }
+
+    cout << "El articulo que mas se vendio fue el numero" << artMax
+         << " con un total de " << maxVentas << " unidades." << endl;
+
+    cout << "Articulos sin ventas: ";
+    bool haySinVentas = false;
+    for (int i = 0; i < 20; i++) {
+        if (ventas[i] == 0) {
+            cout << i + 1 << " ";
+            haySinVentas = true;
+        }
+    }
+    if (!haySinVentas) cout << "Ninguno";
+    cout << endl;
+
+    cout << "Unidades vendidas del articulo 10: " << ventas[9] << endl;
+
+    return 0;
+}
