@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int codigoArticulo, dia, cantidadVendida;
+    int ventasArticulos[200] = {0};
+    int ventasDias[31] = {0};
+    int totalVentas = 0;
+    int contadorVentas = 0;
+
+    cout << "Ingrese el codigo de articulo (1 a 200, 0 para terminar): ";
+    cin >> codigoArticulo;
+
+    while (codigoArticulo != 0) {
+        cout << "Ingrese el dia (1 a 31): ";
+        cin >> dia;
+        cout << "Ingrese la cantidad vendida: ";
+        cin >> cantidadVendida;
+
+        ventasArticulos[codigoArticulo - 1] += cantidadVendida;
+        ventasDias[dia - 1] += cantidadVendida;
+
+        totalVentas += cantidadVendida;
+        contadorVentas++;
+
+        cout << "Ingrese el codigo de articulo (1 a 200, 0 para terminar): ";
+        cin >> codigoArticulo;
+    }
+
+    cout << "===RESULTADOS===";
+
+    cout << "Total vendido por cada articulo:";
+    for (int i = 0; i < 200; i++) {
+        if (ventasArticulos[i] > 0)
+            cout << "Articulo " << i + 1 << ": " << ventasArticulos[i] << " unidades\n";
+    }
+
+    cout << "Dias sin ventas: ";
+    bool huboDiasSinVentas = false;
+    for (int i = 0; i < 31; i++) {
+        if (ventasDias[i] == 0) {
+            cout << i + 1 << " ";
+            huboDiasSinVentas = true;
+        }
+    }
+    if (!huboDiasSinVentas)
+        cout << "Ninguno";
+    cout << endl;
+
+    float promedio = (float) totalVentas / contadorVentas;
+    cout << "\nPromedio de ventas por registro: " << promedio << endl;
+
+    cout << "Articulos con ventas mayores al promedio:";
+    for (int i = 0; i < 200; i++) {
+        if (ventasArticulos[i] > promedio)
+            cout << "Articulo " << i + 1 << " (" << ventasArticulos[i] << " unidades)\n";
+    }
+
+    return 0;
+}
