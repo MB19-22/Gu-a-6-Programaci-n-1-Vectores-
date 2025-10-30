@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int numVendedor;
+    float importeVenta;
+    float ventas[15] = {0};
+
+    cout << "Ingrese el numero de vendedor (1 a 15, 0 para finalizar): ";
+    cin >> numVendedor;
+
+    while (numVendedor != 0) {
+        cout << "Ingrese el importe de la venta: $";
+        cin >> importeVenta;
+
+        ventas[numVendedor - 1] += importeVenta;
+
+        cout << "Ingrese el numero de vendedor (1 a 15, 0 para finalizar): ";
+        cin >> numVendedor;
+    }
+
+    float maxVenta = ventas[0];
+    int vendedorMax = 1;
+
+    for (int i = 1; i < 15; i++) {
+        if (ventas[i] > maxVenta) {
+            maxVenta = ventas[i];
+            vendedorMax = i + 1;
+        }
+    }
+
+    cout << "El vendedor que mas vendio fue el numero " << vendedorMax
+         << " con un total de $" << maxVenta << endl;
+
+    cout << "Vendedores sin ventas: ";
+    bool haySinVentas = false;
+    for (int i = 0; i < 15; i++) {
+        if (ventas[i] == 0) {
+            cout << i + 1 << " ";
+            haySinVentas = true;
+        }
+    }
+    if (!haySinVentas) cout << "Ninguno";
+    cout << endl;
+
+    float totalEmpresa = 0;
+    for (int i = 0; i < 15; i++) {
+        totalEmpresa += ventas[i];
+    }
+
+    cout << "Total recaudado por la empresa: $" << totalEmpresa << endl;
+
+    return 0;
+}
